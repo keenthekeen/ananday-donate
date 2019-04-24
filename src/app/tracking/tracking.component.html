@@ -1,0 +1,19 @@
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter has-text-centered">
+    <div class="box" id="track-box">
+      <div class="is-size-2">{{ 'tracking.title' | translate }}</div>
+      <hr>
+      <div class="is-size-3">{{ 'tracking.enter-code' | translate }}</div>
+      <div class="field">
+        <div class="control">
+          <input type="text" class="input is-medium" [formControl]="track_code">
+        </div>
+      </div>
+      <hr>
+      <button class="button is-primary is-medium is-rounded" (click)="go()">{{ 'tracking.track' | translate }}</button>
+      <div>
+        <a routerLink="/recovery">{{ 'tracking.forget' | translate }}</a>
+      </div>
+    </div>
+  </div>
+</div>

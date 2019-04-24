@@ -1,0 +1,243 @@
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <div class="box" id="register-box">
+      <form [formGroup]="registerForm" (ngSubmit)="presubmit()">
+        <div class="is-size-2 has-text-centered">{{ 'register.title' | translate }}</div>
+        <div class="is-size-6 has-text-centered">{{ 'register.subtitle' | translate }}</div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.name' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input type="text" class="input" [placeholder]="'register.name' | translate" formControlName="name">
+              </div>
+              <p class="help is-danger" *ngIf="name.dirty && name.errors && name.errors['required']">{{ 'register.missing' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.telephone' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input type="text" class="input" [placeholder]="'register.telephone' | translate" formControlName="telephone">
+              </div>
+              <p class="help is-danger" *ngIf="telephone.dirty && telephone.errors && telephone.errors['required']">{{ 'register.missing' | translate }}</p>
+              <p class="help is-danger" *ngIf="telephone.dirty && telephone.errors && telephone.errors['pattern']">{{ 'register.telephone_wrong_format' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.email' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input type="text" class="input" [placeholder]="'register.email' | translate" formControlName="email">
+              </div>
+              <p class="help is-danger" *ngIf="email.dirty && email.errors && email.errors['email']">{{ 'register.email_wrong_format' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.shipping-address' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <textarea class="textarea" [placeholder]="'register.shipping-address' | translate" formControlName="shipping_address"></textarea>
+              </div>
+              <p class="help is-danger" *ngIf="shipping_address.dirty && shipping_address.errors && shipping_address.errors['required']">{{ 'register.missing' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.shipping-type.label' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" value="registered" formControlName="shipping_type" name="shipping_type"> {{ 'common.shipping_type.registered' | translate }}
+                </label>
+                <label class="radio">
+                  <input type="radio" value="normal" formControlName="shipping_type" name="shipping_type"> {{ 'common.shipping_type.normal' | translate }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+          </div>
+          <div class="field-body">
+            <div class="has-text-danger">{{ 'register.shipping-type.fee' | translate }}</div>
+          </div>
+        </div>
+        <div class="is-size-2 has-text-centered">{{ 'register.receipt.label' | translate }}</div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.receipt.label' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <label class="radio">
+                  <input type="radio" [value]="true" formControlName="receipt" name="receipt"> {{ 'common.receipt.yes' | translate }}
+                </label>
+                <label class="radio">
+                  <input type="radio" [value]="false" formControlName="receipt" name="receipt"> {{ 'common.receipt.no' | translate }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+          </div>
+          <div class="field-body">
+            <div>{{ 'register.receipt.process' | translate }}</div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+          </div>
+          <div class="field-body">
+            <label class="checkbox">
+              <input type="checkbox" formControlName="receipt_same_details"> {{ 'register.receipt.details.same-as-shipping' | translate }}
+            </label>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.receipt.details.name' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input type="text" class="input" [placeholder]="'register.receipt.details.name' | translate" formControlName="receipt_name">
+              </div>
+              <p class="help is-danger" *ngIf="receipt_name.dirty && registerForm.errors && registerForm.errors['receipt_name_required']">{{ 'register.missing' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.receipt.details.address' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <textarea class="textarea" [placeholder]="'register.receipt.details.address' | translate" formControlName="receipt_address"></textarea>
+              </div>
+              <p class="help is-danger" *ngIf="receipt_address.dirty && registerForm.errors && registerForm.errors['receipt_address_required']">{{ 'register.missing' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="is-size-2 has-text-centered">{{ 'register.donation-details.title' | translate }}</div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.donation-details.amount' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input type="number" class="input" [placeholder]="'register.donation-details.amount' | translate" min="0" formControlName="donation_amount">
+              </div>
+              <p class="help is-danger" *ngIf="donation_amount.dirty && donation_amount.errors && donation_amount.errors['required']">{{ 'register.missing' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.donation-details.date' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input type="date" class="input" formControlName="donation_date">
+              </div>
+              <p class="help is-danger" *ngIf="donation_date.errors && donation_date.errors['required']">{{ 'register.missing' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.donation-details.time' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input type="time" class="input" formControlName="donation_time">
+              </div>
+              <p class="help is-danger" *ngIf="donation_time.errors && donation_time.errors['required']">{{ 'register.missing' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.donation-details.slip' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <div class="file has-name">
+                  <label class="file-label">
+                    <input class="file-input" type="file" (change)="onFileChanged($event)" accept="image/*">
+                    <span class="file-cta">
+                      <span class="file-label">
+                        {{ 'register.donation-details.choose-file' | translate }}
+                      </span>
+                    </span>
+                    <span class="file-name">
+                      {{ fileName }}
+                    </span>
+                  </label>
+                </div>
+              </div>
+              <p class="help is-danger" *ngIf="slip_file.dirty && slip_file.errors && slip_file.errors['required']">{{ 'register.missing_file' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+          </div>
+          <div class="field-body">
+            <div>{{ 'register.donation-details.slip-file-restriction' | translate }}</div>
+          </div>
+        </div>
+        <div class="is-size-2 has-text-centered">{{ 'register.badge.title' | translate }}</div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+            <label class="label">{{ 'register.badge.amount' | translate }}</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input type="number" class="input" [placeholder]="'register.badge.amount' | translate" min="0" formControlName="badge_amount">
+              </div>
+              <p class="help is-danger" *ngIf="badge_amount.dirty && badge_amount.errors && badge_amount.errors['required']">{{ 'register.missing' | translate }}</p>
+              <p class="help is-danger" *ngIf="badge_amount.dirty && registerForm.errors && registerForm.errors['max_badge_amount']">{{ 'register.badge_exceed' | translate }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="field is-horizontal">
+          <div class="field-label">
+          </div>
+          <div class="field-body">
+            <div>{{ 'register.badge.condition' | translate }}</div>
+          </div>
+        </div>
+        <re-captcha #captchaRef="reCaptcha" (resolved)="$event && submit($event)"></re-captcha>
+        <input type="submit" class="button is-primary is-medium is-rounded is-fullwidth" [value]="'register.register' | translate" [disabled]="!registerForm.valid || submitting">
+      </form>
+    </div>
+  </div>
+</div>

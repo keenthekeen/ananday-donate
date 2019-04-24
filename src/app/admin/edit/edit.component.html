@@ -1,0 +1,120 @@
+<div class="container" *ngIf="donation$ | async as donation">
+  <h1 class="is-size-2">รหัสติดตาม: {{ donation.register.track_code }}</h1>
+  <h2 class="is-size-3">สถานะ: {{ donation | status }}</h2>
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>ชื่อ-สกุล</th>
+        <td>{{ donation.register.name }}</td>
+      </tr>
+      <tr>
+        <th>โทรศัพท์</th>
+        <td>{{ donation.register.telephone }}</td>
+      </tr>
+      <tr>
+        <th>อีเมล</th>
+        <td>{{ donation.register.email }}</td>
+      </tr>
+      <tr>
+        <th>ที่อยู่จัดส่ง</th>
+        <td>{{ donation.register.shipping_address }}</td>
+      </tr>
+      <tr>
+        <th>ประเภทการจัดส่ง</th>
+        <td>{{ donation.register.shipping_type | shippingType | translate }}</td>
+      </tr>
+      <tr>
+        <th>ใบเสร็จรับเงิน</th>
+        <td>{{ donation.register.receipt | receipt | translate }}</td>
+      </tr>
+      <tr *ngIf="donation.register.receipt === true">
+        <th>ชื่อในใบเสร็จรับเงิน</th>
+        <td>{{ donation.register.receipt_name }}</td>
+      </tr>
+      <tr *ngIf="donation.register.receipt === true">
+        <th>ที่อยู่ในใบเสร็จรับเงิน</th>
+        <td>{{ donation.register.receipt_address }}</td>
+      </tr>
+      <tr>
+        <th>จำนวนเงินโอน</th>
+        <td>{{ donation.register.donation_amount }}</td>
+      </tr>
+      <tr>
+        <th>วันที่โอน</th>
+        <td>{{ donation.register.donation_date }}</td>
+      </tr>
+      <tr>
+        <th>เวลาโอน</th>
+        <td>{{ donation.register.donation_time }}</td>
+      </tr>
+      <tr>
+        <th>จำนวนเข็มที่ระลึก</th>
+        <td>{{ donation.register.badge_amount }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <div>
+    <a [href]="slipUrl | async">หลักฐานการโอนเงิน</a>
+  </div>
+  <h2 class="is-size-3">ตรวจสอบ</h2>
+  <button class="button is-success" (click)="check(true)">ผ่าน</button>
+  <button class="button is-danger" (click)="check(false)">ไม่ผ่าน</button>
+  <ng-container *ngIf="donation.check">
+    <div>ตรวจสอบหลักฐานการโอนเงินแล้ว
+      <strong>{{ donation.check.pass | pass }}</strong>
+    </div>
+    <div>ตรวจสอบเมื่อ {{ donation.check.timestamp | timestamp }}</div>
+  </ng-container>
+  <ng-container *ngIf="donation.check && donation.check.pass">
+    <h2 class="is-size-3">เตรียมเข็มที่ระลึก</h2>
+    <ng-container *ngIf="donation.register.badge_amount > 0; else noBadge">
+      <ng-container *ngIf="!donation.badge; else badgePrepared">
+        <button class="button is-primary" (click)="prepareBadge()">เตรียมเข็มที่ระลึกเรียบร้อย</button>
+      </ng-container>
+      <ng-template #badgePrepared>
+        <div>เตรียมเข็มที่ระลึกเรียบร้อยแล้ว</div>
+        <h2 class="is-size-3">จัดส่งเข็มที่ระลึก</h2>
+        <div *ngIf="donation.register.shipping_type === 'registered'">รหัสติดตามพัสดุ (ไปรษณีย์ลงทะเบียน)</div>
+        <input type="text" class="control" *ngIf="donation.register.shipping_type === 'registered'" [formControl]="badge_shipping_code">
+        <br>
+        <button class="button is-primary" [disabled]="donation.register.shipping_type === 'registered' && badge_shipping_code.invalid"
+          (click)="shipBadge(donation.register.shipping_type)">จัดส่งเข็มที่ระลึก</button>
+        <ng-container *ngIf="donation.badge_shipping">
+          <div>จัดส่งเข็มที่ระลึกแล้ว</div>
+          <div *ngIf="donation.register.shipping_type === 'registered'">รหัสติดตามพัสดุ:
+            <strong>{{ donation.badge_shipping.code }}</strong>
+          </div>
+        </ng-container>
+      </ng-template>
+    </ng-container>
+    <ng-template #noBadge>
+      <div>ผู้บริจาครายนี้ไม่ต้องการเข็มที่ระลึก</div>
+    </ng-template>
+  </ng-container>
+  <ng-container *ngIf="donation.check && donation.check.pass && (donation.register.badge_amount === 0 || donation.badge_shipping)">
+    <h2 class="is-size-3">ออกใบเสร็จรับเงิน</h2>
+    <ng-container *ngIf="donation.register.receipt; else noReceipt">
+      <input type="text" class="control" [formControl]="receipt_code">
+      <button class="button is-primary" (click)="prepareReceipt()" [disabled]="receipt_code.invalid">ออกใบเสร็จรับเงิน</button>
+      <ng-container *ngIf="donation.receipt">
+        <div>ออกใบเสร็จรับเงินเรียบร้อยแล้ว</div>
+        <div>ใบเสร็จรับเงินเลขที่: {{ donation.receipt.code }}</div>
+        <h2 class="is-size-3">จัดส่งใบเสร็จรับเงิน</h2>
+        <div *ngIf="donation.register.shipping_type === 'registered'">รหัสติดตามพัสดุ (ไปรษณีย์ลงทะเบียน)</div>
+        <input type="text" class="control" *ngIf="donation.register.shipping_type === 'registered'" [formControl]="receipt_shipping_code">
+        <br>
+        <button class="button is-primary" [disabled]="donation.register.shipping_type === 'registered' && receipt_shipping_code.invalid"
+          (click)="shipReceipt(donation.register.shipping_type)">จัดส่งใบเสร็จรับเงิน</button>
+        <ng-container *ngIf="donation.receipt_shipping">
+          <div>จัดส่งใบเสร็จรับเงินแล้ว</div>
+          <div *ngIf="donation.register.shipping_type === 'registered'">รหัสติดตามพัสดุ:
+            <strong>{{ donation.receipt_shipping.code }}</strong>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-template #noReceipt>
+      <div>ผู้บริจาครายนี้ไม่ต้องการใบเสร็จรับเงิน</div>
+    </ng-template>
+  </ng-container>
+</div>

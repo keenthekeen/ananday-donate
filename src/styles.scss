@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+$family-primary: 'Pridi', BlinkMacSystemFont, -apple-system, 'Segoe UI',
+  'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+  'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+$primary: #9c27b0;
+
+@import './../node_modules/bulma/bulma.sass';
+
+// body {
+//   background-image: url('/assets/bg.jpg');
+//   background-repeat: no-repeat;
+//   background-attachment: fixed;
+//   background-position: left;
+//   -webkit-background-size: cover;
+//   -moz-background-size: cover;
+//   background-size: cover;
+//   -o-background-size: cover;
+// }
+
+// .fixed-bg {
+//   background-image: url('/assets/bg.jpg');
+//   min-height: 100%;
+//   background-attachment: fixed;
+//   background-position: left;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
+
+// html, body {
+//   height: 100%;
+// }

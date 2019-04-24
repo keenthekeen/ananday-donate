@@ -1,0 +1,124 @@
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter" *ngIf="tracking$ | async as tracking">
+    <div class="box">
+      <strong class="is-size-3">{{ 'tracking.details.code' | translate }}: {{ tracking.register.track_code }}</strong>
+    </div>
+    <div class="box">
+      <div class="columns">
+        <div class="column is-2">
+          <img src="/assets/01-registered.png">
+        </div>
+        <div class="column is-10">
+          <strong>{{ 'tracking.details.registered' | translate }}</strong>
+          <table class="table is-fullwidth">
+            <tbody>
+              <tr>
+                <th>{{ 'tracking.details.name' | translate }}</th>
+                <td>{{ tracking.register.name }}</td>
+              </tr>
+              <tr>
+                <th>{{ 'tracking.details.telephone' | translate }}</th>
+                <td>{{ tracking.register.telephone }}</td>
+              </tr>
+              <tr>
+                <th>{{ 'tracking.details.shipping_address' | translate }}</th>
+                <td>{{ tracking.register.shipping_address }}</td>
+              </tr>
+              <tr>
+                <th>{{ 'tracking.details.shipping_type' | translate }}</th>
+                <td>{{ tracking.register.shipping_type | shippingType | translate }}</td>
+              </tr>
+              <tr>
+                <th>{{ 'tracking.details.receipt_want' | translate }}</th>
+                <td>{{ tracking.register.receipt | receipt | translate }}</td>
+              </tr>
+              <tr *ngIf="tracking.register.receipt === true">
+                <th>{{ 'tracking.details.receipt_name' | translate }}</th>
+                <td>{{ tracking.register.receipt_name }}</td>
+              </tr>
+              <tr *ngIf="tracking.register.receipt === true">
+                <th>{{ 'tracking.details.receipt_address' | translate }}</th>
+                <td>{{ tracking.register.receipt_address }}</td>
+              </tr>
+              <tr>
+                <th>{{ 'tracking.details.donation_amount' | translate }}</th>
+                <td>{{ tracking.register.donation_amount }}</td>
+              </tr>
+              <tr>
+                <th>{{ 'tracking.details.badge_amount' | translate }}</th>
+                <td>{{ tracking.register.badge_amount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="columns">
+        <div class="column is-2">
+          <img [src]="tracking.check | checkStatus" [class.not-checked]="!tracking.check">
+        </div>
+        <div class="column is-10">
+          <strong>{{ 'tracking.details.slip' | translate }}</strong>
+          <div>{{ tracking.check | checkStatusText | translate }}</div>
+          <div *ngIf="tracking.check">
+            {{ 'tracking.details.checked_by' | translate }} {{ tracking.check.checked_by }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box" *ngIf="tracking.register.badge_amount > 0">
+      <div class="columns">
+        <div class="column is-2">
+          <img src="/assets/04-badge.png" [class.not-checked]="!tracking.badge">
+        </div>
+        <div class="column is-10">
+          <strong>{{ 'tracking.details.badge' | translate }}</strong>
+          <div>{{ tracking.badge | badgePrepare | translate }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="box" *ngIf="tracking.register.badge_amount > 0">
+      <div class="columns">
+        <div class="column is-2">
+          <img src="/assets/05-shipping.png" [class.not-checked]="!tracking.badge_shipping">
+        </div>
+        <div class="column is-10">
+          <strong>{{ 'tracking.details.badge_shipping' | translate }}</strong>
+          <div>{{ tracking.badge_shipping | badgeShipping | translate }}</div>
+          <div *ngIf="tracking.badge_shipping && tracking.register.shipping_type === 'registered'">
+            {{ 'tracking.details.badge_shipping_code' | translate }}: {{ tracking.badge_shipping.code }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box" *ngIf="tracking.register.receipt">
+      <div class="columns">
+        <div class="column is-2">
+          <img src="/assets/06-receipt.png" [class.not-checked]="!tracking.receipt">
+        </div>
+        <div class="column is-10">
+          <strong>{{ 'tracking.details.receipt' | translate }}</strong>
+          <div>{{ tracking.receipt | receiptPrepare | translate }}</div>
+          <div *ngIf="tracking.receipt">
+            {{ 'tracking.details.receipt_code' | translate }}: {{ tracking.receipt.code }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box" *ngIf="tracking.register.receipt">
+      <div class="columns">
+        <div class="column is-2">
+          <img src="/assets/05-shipping.png" [class.not-checked]="!tracking.receipt_shipping">
+        </div>
+        <div class="column is-10">
+          <strong>{{ 'tracking.details.receipt_shipping' | translate }}</strong>
+          <div>{{ tracking.receipt_shipping | receiptShipping | translate }}</div>
+          <div *ngIf="tracking.receipt_shipping && tracking.register.shipping_type === 'registered'">
+            {{ 'tracking.details.receipt_shipping_code' | translate }}: {{ tracking.receipt_shipping.code }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

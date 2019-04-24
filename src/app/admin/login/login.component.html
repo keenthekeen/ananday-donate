@@ -1,0 +1,22 @@
+<div class="columns">
+  <div class="column is-half is-offset-one-quarter">
+    <div class="box">
+      <div class="is-size-4 has-text-centered">หน้าผู้ดูแล</div>
+      <form [formGroup]="loginForm" (ngSubmit)="submit()">
+        <div class="field">
+          <label class="label">Email</label>
+          <div class="control">
+            <input type="text" class="input" formControlName="email">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Password</label>
+          <div class="control">
+            <input type="password" class="input" formControlName="password">
+          </div>
+        </div>
+        <input type="submit" class="button is-primary is-medium is-rounded" value="เข้าสู่ระบบ">
+      </form>
+    </div>
+  </div>
+</div>

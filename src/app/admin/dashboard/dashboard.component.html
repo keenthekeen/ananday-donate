@@ -1,0 +1,35 @@
+<div class="tabs is-fullwidth is-centered is-boxed">
+  <ul>
+    <li [class.is-active]="(currentMode$ | async) === 'all'"><a [routerLink]="[{mode: 'all'}]">ทั้งหมด</a></li>
+    <li [class.is-active]="(currentMode$ | async) === 'check'"><a [routerLink]="[{mode: 'check'}]">รอตรวจสอบ</a></li>
+    <li [class.is-active]="(currentMode$ | async) === 'prepare_badge'"><a [routerLink]="[{mode: 'prepare_badge'}]">รอเตรียมเข็มฯ</a></li>
+    <li [class.is-active]="(currentMode$ | async) === 'ship_badge'"><a [routerLink]="[{mode: 'ship_badge'}]">รอจัดส่งเข็มฯ</a></li>
+    <li [class.is-active]="(currentMode$ | async) === 'prepare_receipt'"><a [routerLink]="[{mode: 'prepare_receipt'}]">รอออกใบเสร็จฯ</a></li>
+    <li [class.is-active]="(currentMode$ | async) === 'ship_receipt'"><a [routerLink]="[{mode: 'ship_receipt'}]">รอส่งใบเสร็จฯ</a></li>
+    <li [class.is-active]="(currentMode$ | async) === 'done'"><a [routerLink]="[{mode: 'done'}]">เสร็จสิ้น</a></li>
+    <li [class.is-active]="(currentMode$ | async) === 'not_pass'"><a [routerLink]="[{mode: 'not_pass'}]">ตรวจสอบไม่ผ่าน</a></li>
+  </ul>
+</div>
+<input type="date" [formControl]="date">
+<button class="button is-success" (click)="applyFilter()">ค้นหาตามวันโอนเงิน</button>
+<button class="button is-danger" (click)="clearFilter()">แสดงทุกวัน</button>
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>รหัสติดตาม</th>
+      <th>ชื่อ-สกุล</th>
+      <th>วัน-เวลาแจ้ง</th>
+      <th>สถานะ</th>
+      <th>แก้ไข</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let donation of dateFilteredDonations$ | async">
+      <td>{{ donation.register.track_code }}</td>
+      <td>{{ donation.register.name }}</td>
+      <td>{{ donation.register.timestamp | timestamp }}</td>
+      <td>{{ donation | status }}</td>
+      <td><a [routerLink]="['./', donation.register.track_code]">แก้ไข</a></td>
+    </tr>
+  </tbody>
+</table>
