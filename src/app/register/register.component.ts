@@ -21,7 +21,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('captchaRef') reCaptcha: RecaptchaComponent;
+  @ViewChild('captchaRef', { static: true }) reCaptcha: RecaptchaComponent;
   registerForm: FormGroup;
   maxBadge$: Observable<number>;
   fileName: string;
