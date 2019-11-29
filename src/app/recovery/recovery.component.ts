@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FirebaseApp } from '@angular/fire';
-import { FirebaseFunctions } from '@firebase/functions-types';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { first } from 'rxjs/operators';
@@ -30,8 +29,7 @@ export class RecoveryComponent implements OnInit {
   }
 
   submit() {
-    const lookup = ((this
-      .firebase as any).functions() as FirebaseFunctions).httpsCallable(
+    const lookup = this.firebase.functions().httpsCallable(
       'lookup'
     );
     lookup(this.recoveryForm.value).then(res => {
