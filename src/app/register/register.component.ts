@@ -12,7 +12,6 @@ import 'firebase/functions';
 import { RecaptchaComponent } from 'ng-recaptcha';
 import { Observable, combineLatest } from 'rxjs';
 import { first, map, distinctUntilChanged, startWith } from 'rxjs/operators';
-import { FirebaseFunctions } from '@firebase/functions-types';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -190,8 +189,7 @@ export class RegisterComponent implements OnInit {
       }
     }
     formData.reCaptchaResponse = reCaptchaResponse;
-    const register = ((this
-      .firebase as any).functions() as FirebaseFunctions).httpsCallable(
+    const register = this.firebase.functions().httpsCallable(
       'register'
     );
     register(formData)
