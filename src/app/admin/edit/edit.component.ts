@@ -5,7 +5,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { map, switchMap, first } from 'rxjs/operators';
 import { FirebaseApp } from '@angular/fire';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { firebase } from '@firebase/app';
+import { firebase } from 'firebase/app';
 import 'firebase/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
