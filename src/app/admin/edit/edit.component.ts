@@ -55,10 +55,10 @@ export class EditComponent implements OnInit {
   }
 
   check(pass: boolean) {
-    combineLatest(
+    combineLatest([
       this.afa.authState.pipe(first()),
       this.donationRef$.pipe(first())
-    ).subscribe(([user, ref]) => {
+    ]).subscribe(([user, ref]) => {
       ref.update({
         check: {
           pass,
