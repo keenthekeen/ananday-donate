@@ -3,7 +3,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable, combineLatest } from 'rxjs';
 import { map, switchMap, first } from 'rxjs/operators';
-import { Reference } from '@firebase/database-types';
 import { FirebaseApp } from '@angular/fire';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { firebase } from '@firebase/app';
@@ -18,7 +17,7 @@ import { FormControl, FormBuilder, Validators } from '@angular/forms';
 })
 export class EditComponent implements OnInit {
   donation$: Observable<any>;
-  donationRef$: Observable<Reference>;
+  donationRef$: Observable<firebase.database.Reference>;
   slipUrl: Observable<string>;
   badge_shipping_code: FormControl;
   receipt_code: FormControl;
