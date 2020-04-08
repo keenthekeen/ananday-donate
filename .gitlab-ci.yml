@@ -1,5 +1,12 @@
+test:karma:
+  stage: test
+  image: circleci/node:10-browsers
+  script:
+    - npm ci
+    - npx ng test --progress false --watch false
+
 build:
-  image: node:10-alpine
+  image: circleci/node:10-browsers
   stage: build
   script:
     - npm ci
@@ -25,5 +32,6 @@ deploy:
     - firebase deploy --only hosting --token "$FIREBASE_TOKEN"
 
 stages:
+  - test
   - build
   - deploy
