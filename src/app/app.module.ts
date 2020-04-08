@@ -1,13 +1,7 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import {
-  MissingTranslationHandler,
-  TranslateLoader,
-  TranslateModule
-} from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
   AngularFireModule,
   FirebaseOptionsToken,
@@ -22,7 +16,6 @@ import {
 } from 'ng-recaptcha';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MyMissingTranslationHandler } from './missing-translation-handler';
 import { RecoveryComponent } from './recovery/recovery.component';
 import { RegisterComponent } from './register/register.component';
 import { TrackingDetailsComponent } from './tracking-details/tracking-details.component';
@@ -31,10 +24,7 @@ import { SharedModule } from './shared/shared.module';
 import { HomeComponent } from './home/home.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-export const HttpLoaderFactory = (http: HttpClient) => {
-  return new TranslateHttpLoader(http);
-};
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [
@@ -49,13 +39,6 @@ export const HttpLoaderFactory = (http: HttpClient) => {
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
     RecaptchaModule.forRoot(),
     AngularFireModule,
     AngularFireDatabaseModule,
@@ -63,13 +46,10 @@ export const HttpLoaderFactory = (http: HttpClient) => {
     AngularFireAuthModule,
     ReactiveFormsModule,
     SharedModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TranslocoRootModule
   ],
   providers: [
-    {
-      provide: MissingTranslationHandler,
-      useClass: MyMissingTranslationHandler
-    },
     {
       provide: RECAPTCHA_SETTINGS,
       useValue: {
