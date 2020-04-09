@@ -128,5 +128,8 @@
       }
     }
   },
-  "defaultProject": "ananday-donate"
+  "defaultProject": "ananday-donate",
+  "cli": {
+    "analytics": false
+  }
 }
