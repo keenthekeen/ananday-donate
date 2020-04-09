@@ -41,7 +41,7 @@ export class RecoveryComponent implements OnInit {
         }
       } else {
         this.translate
-          .selectTranslateObject('recovery.not_found')
+          .selectTranslate('recovery.not_found')
           .pipe(first())
           .subscribe(t => {
             alert(t);

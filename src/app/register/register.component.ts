@@ -117,7 +117,7 @@ export class RegisterComponent implements OnInit {
       })
     );
     const sub = this.translate
-      .selectTranslateObject('register.donation-details.no-file')
+      .selectTranslate('register.donation-details.no-file')
       .pipe(first())
       .subscribe(t => {
         this.noFileName = t;
@@ -226,7 +226,7 @@ export class RegisterComponent implements OnInit {
       allowedFileTypes.indexOf(file.type) === -1
     ) {
       this.translate
-        .selectTranslateObject('register.donation-details.invalid-file')
+        .selectTranslate('register.donation-details.invalid-file')
         .pipe(first())
         .subscribe(t => {
           alert(t);
