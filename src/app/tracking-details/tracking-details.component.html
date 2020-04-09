@@ -67,7 +67,7 @@
         </div>
       </div>
     </div>
-    <div class="box" *ngIf="tracking.register.badge_amount > 0">
+    <div class="box" *ngIf="tracking.check && tracking.check.pass && tracking.register.badge_amount > 0">
       <div class="columns">
         <div class="column is-2 has-text-centered">
           <span class="icon is-large has-text-success"><fa-icon [icon]="faGift" size="3x" [class.not-checked]="!tracking.badge"></fa-icon></span>
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <div class="box" *ngIf="tracking.register.badge_amount > 0">
+    <div class="box" *ngIf="tracking.check && tracking.check.pass && tracking.register.badge_amount > 0">
       <div class="columns">
         <div class="column is-2 has-text-centered">
           <span class="icon is-large has-text-success"><fa-icon [icon]="faShippingFast" size="3x" [class.not-checked]="!tracking.badge_shipping"></fa-icon></span>
@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class="box" *ngIf="tracking.register.receipt">
+    <div class="box" *ngIf="tracking.check && tracking.check.pass && tracking.register.receipt">
       <div class="columns">
         <div class="column is-2 has-text-centered">
           <span class="icon is-large has-text-success"><fa-icon [icon]="faReceipt" size="3x" [class.not-checked]="!tracking.receipt"></fa-icon></span>
@@ -106,7 +106,7 @@
         </div>
       </div>
     </div>
-    <div class="box" *ngIf="tracking.register.receipt">
+    <div class="box" *ngIf="tracking.check && tracking.check.pass && tracking.register.receipt">
       <div class="columns">
         <div class="column is-2 has-text-centered">
           <span class="icon is-large has-text-success"><fa-icon [icon]="faEnvelope" size="3x" [class.not-checked]="!tracking.receipt_shipping"></fa-icon></span>
