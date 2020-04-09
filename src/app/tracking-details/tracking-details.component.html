@@ -1,7 +1,7 @@
 <div class="columns">
   <div class="column is-half is-offset-one-quarter" *ngIf="tracking$ | async as tracking">
     <div class="box">
-      <strong class="is-size-3">{{ 'tracking.details.code' | translate }}: {{ tracking.register.track_code }}</strong>
+      <strong class="is-size-3">{{ 'tracking.details.code' | transloco }}: {{ tracking.register.track_code }}</strong>
     </div>
     <div class="box">
       <div class="columns">
@@ -9,43 +9,43 @@
           <span class="icon is-large has-text-success"><fa-icon [icon]="faCheckSquare" size="3x"></fa-icon></span>
         </div>
         <div class="column is-10">
-          <strong>{{ 'tracking.details.registered' | translate }}</strong>
+          <strong>{{ 'tracking.details.registered' | transloco }}</strong>
           <table class="table is-fullwidth">
             <tbody>
               <tr>
-                <th>{{ 'tracking.details.name' | translate }}</th>
+                <th>{{ 'tracking.details.name' | transloco }}</th>
                 <td>{{ tracking.register.name }}</td>
               </tr>
               <tr>
-                <th>{{ 'tracking.details.telephone' | translate }}</th>
+                <th>{{ 'tracking.details.telephone' | transloco }}</th>
                 <td>{{ tracking.register.telephone }}</td>
               </tr>
               <tr>
-                <th>{{ 'tracking.details.shipping_address' | translate }}</th>
+                <th>{{ 'tracking.details.shipping_address' | transloco }}</th>
                 <td>{{ tracking.register.shipping_address }}</td>
               </tr>
               <tr>
-                <th>{{ 'tracking.details.shipping_type' | translate }}</th>
-                <td>{{ tracking.register.shipping_type | shippingType | translate }}</td>
+                <th>{{ 'tracking.details.shipping_type' | transloco }}</th>
+                <td>{{ tracking.register.shipping_type | shippingType | transloco }}</td>
               </tr>
               <tr>
-                <th>{{ 'tracking.details.receipt_want' | translate }}</th>
-                <td>{{ tracking.register.receipt | receipt | translate }}</td>
+                <th>{{ 'tracking.details.receipt_want' | transloco }}</th>
+                <td>{{ tracking.register.receipt | receipt | transloco }}</td>
               </tr>
               <tr *ngIf="tracking.register.receipt === true">
-                <th>{{ 'tracking.details.receipt_name' | translate }}</th>
+                <th>{{ 'tracking.details.receipt_name' | transloco }}</th>
                 <td>{{ tracking.register.receipt_name }}</td>
               </tr>
               <tr *ngIf="tracking.register.receipt === true">
-                <th>{{ 'tracking.details.receipt_address' | translate }}</th>
+                <th>{{ 'tracking.details.receipt_address' | transloco }}</th>
                 <td>{{ tracking.register.receipt_address }}</td>
               </tr>
               <tr>
-                <th>{{ 'tracking.details.donation_amount' | translate }}</th>
+                <th>{{ 'tracking.details.donation_amount' | transloco }}</th>
                 <td>{{ tracking.register.donation_amount }}</td>
               </tr>
               <tr>
-                <th>{{ 'tracking.details.badge_amount' | translate }}</th>
+                <th>{{ 'tracking.details.badge_amount' | transloco }}</th>
                 <td>{{ tracking.register.badge_amount }}</td>
               </tr>
             </tbody>
@@ -59,10 +59,10 @@
           <span class="icon is-large" [class.not-checked]="!tracking.check" [class.has-text-danger]="tracking.check && !tracking.check.pass" [class.has-text-success]="tracking.check && tracking.check.pass"><fa-icon [icon]="faMoneyCheckAlt" size="3x"></fa-icon></span>
         </div>
         <div class="column is-10">
-          <strong>{{ 'tracking.details.slip' | translate }}</strong>
-          <div>{{ tracking.check | checkStatusText | translate }}</div>
+          <strong>{{ 'tracking.details.slip' | transloco }}</strong>
+          <div>{{ tracking.check | checkStatusText | transloco }}</div>
           <div *ngIf="tracking.check">
-            {{ 'tracking.details.checked_by' | translate }} {{ tracking.check.checked_by }}
+            {{ 'tracking.details.checked_by' | transloco }} {{ tracking.check.checked_by }}
           </div>
         </div>
       </div>
@@ -73,8 +73,8 @@
           <span class="icon is-large has-text-success"><fa-icon [icon]="faGift" size="3x" [class.not-checked]="!tracking.badge"></fa-icon></span>
         </div>
         <div class="column is-10">
-          <strong>{{ 'tracking.details.badge' | translate }}</strong>
-          <div>{{ tracking.badge | badgePrepare | translate }}</div>
+          <strong>{{ 'tracking.details.badge' | transloco }}</strong>
+          <div>{{ tracking.badge | badgePrepare | transloco }}</div>
         </div>
       </div>
     </div>
@@ -84,10 +84,10 @@
           <span class="icon is-large has-text-success"><fa-icon [icon]="faShippingFast" size="3x" [class.not-checked]="!tracking.badge_shipping"></fa-icon></span>
         </div>
         <div class="column is-10">
-          <strong>{{ 'tracking.details.badge_shipping' | translate }}</strong>
-          <div>{{ tracking.badge_shipping | badgeShipping | translate }}</div>
+          <strong>{{ 'tracking.details.badge_shipping' | transloco }}</strong>
+          <div>{{ tracking.badge_shipping | badgeShipping | transloco }}</div>
           <div *ngIf="tracking.badge_shipping && tracking.register.shipping_type === 'registered'">
-            {{ 'tracking.details.badge_shipping_code' | translate }}: {{ tracking.badge_shipping.code }}
+            {{ 'tracking.details.badge_shipping_code' | transloco }}: {{ tracking.badge_shipping.code }}
           </div>
         </div>
       </div>
@@ -98,10 +98,10 @@
           <span class="icon is-large has-text-success"><fa-icon [icon]="faReceipt" size="3x" [class.not-checked]="!tracking.receipt"></fa-icon></span>
         </div>
         <div class="column is-10">
-          <strong>{{ 'tracking.details.receipt' | translate }}</strong>
-          <div>{{ tracking.receipt | receiptPrepare | translate }}</div>
+          <strong>{{ 'tracking.details.receipt' | transloco }}</strong>
+          <div>{{ tracking.receipt | receiptPrepare | transloco }}</div>
           <div *ngIf="tracking.receipt">
-            {{ 'tracking.details.receipt_code' | translate }}: {{ tracking.receipt.code }}
+            {{ 'tracking.details.receipt_code' | transloco }}: {{ tracking.receipt.code }}
           </div>
         </div>
       </div>
@@ -112,10 +112,10 @@
           <span class="icon is-large has-text-success"><fa-icon [icon]="faEnvelope" size="3x" [class.not-checked]="!tracking.receipt_shipping"></fa-icon></span>
         </div>
         <div class="column is-10">
-          <strong>{{ 'tracking.details.receipt_shipping' | translate }}</strong>
-          <div>{{ tracking.receipt_shipping | receiptShipping | translate }}</div>
+          <strong>{{ 'tracking.details.receipt_shipping' | transloco }}</strong>
+          <div>{{ tracking.receipt_shipping | receiptShipping | transloco }}</div>
           <div *ngIf="tracking.receipt_shipping && tracking.register.shipping_type === 'registered'">
-            {{ 'tracking.details.receipt_shipping_code' | translate }}: {{ tracking.receipt_shipping.code }}
+            {{ 'tracking.details.receipt_shipping_code' | transloco }}: {{ tracking.receipt_shipping.code }}
           </div>
         </div>
       </div>

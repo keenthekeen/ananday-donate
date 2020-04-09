@@ -1,33 +1,33 @@
 <div class="columns">
   <div class="column is-half is-offset-one-quarter has-text-centered">
     <div class="box" id="recovery-box">
-      <div class="is-size-2">{{ 'recovery.title' | translate }}</div>
+      <div class="is-size-2">{{ 'recovery.title' | transloco }}</div>
       <form [formGroup]="recoveryForm" (ngSubmit)="submit()">
         <div class="field is-horizontal">
           <div class="field-label">
-            <label class="label">{{ 'recovery.name' | translate }}</label>
+            <label class="label">{{ 'recovery.name' | transloco }}</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input type="text" class="input" [placeholder]="'recovery.name' | translate" formControlName="name">
+                <input type="text" class="input" [placeholder]="'recovery.name' | transloco" formControlName="name">
               </div>
             </div>
           </div>
         </div>
         <div class="field is-horizontal">
           <div class="field-label">
-            <label class="label">{{ 'recovery.telephone' | translate }}</label>
+            <label class="label">{{ 'recovery.telephone' | transloco }}</label>
           </div>
           <div class="field-body">
             <div class="field">
               <div class="control">
-                <input type="text" class="input" [placeholder]="'recovery.telephone' | translate" formControlName="telephone">
+                <input type="text" class="input" [placeholder]="'recovery.telephone' | transloco" formControlName="telephone">
               </div>
             </div>
           </div>
         </div>
-        <input type="submit" class="button is-primary is-medium is-rounded" [value]="'recovery.search' | translate">
+        <input type="submit" class="button is-primary is-medium is-rounded" [value]="'recovery.search' | transloco">
       </form>
     </div>
   </div>

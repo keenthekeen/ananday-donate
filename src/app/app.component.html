@@ -2,7 +2,7 @@
   <div class="container">
   <div class="navbar-brand">
     <a class="navbar-item" routerLink="/">
-      {{ 'common.branding' | translate }}
+      {{ 'common.branding' | transloco }}
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" (click)="toggle()" [class.is-active]="!collapse">
@@ -13,8 +13,8 @@
   </div>
   <div class="navbar-menu" [class.is-active]="!collapse">
     <div class="navbar-end">
-      <a class="navbar-item" routerLink="/register">{{ 'common.navbar.register' | translate }}</a>
-      <a class="navbar-item" routerLink="/track">{{ 'common.navbar.tracking' | translate }}</a>
+      <a class="navbar-item" routerLink="/register">{{ 'common.navbar.register' | transloco }}</a>
+      <a class="navbar-item" routerLink="/track">{{ 'common.navbar.tracking' | transloco }}</a>
     </div>
   </div>
   </div>
@@ -23,8 +23,8 @@
 <footer class="footer">
   <div class="content has-text-centered container">
     <p>
-      {{ 'common.footer.title' | translate }}
-      <small class="has-text-grey">{{ 'common.footer.subtitle' | translate }}</small>
+      {{ 'common.footer.title' | transloco }}
+      <small class="has-text-grey">{{ 'common.footer.subtitle' | transloco }}</small>
       | <a href="https://www.facebook.com/anandamahidol.day/" target="_blank"><span class="icon"><fa-icon [icon]="faFacebook"></fa-icon></span> ANAN DAY</a>
     </p>
   </div>

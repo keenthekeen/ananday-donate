@@ -9,7 +9,7 @@ import { StatusPipe } from './status.pipe';
 import { TimestampPipe } from './timestamp.pipe';
 import { EditComponent } from './edit/edit.component';
 import { SharedModule } from '../shared/shared.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslocoModule } from '@ngneat/transloco'
 import { PassPipe } from './pass.pipe';
 
 @NgModule({
@@ -18,7 +18,7 @@ import { PassPipe } from './pass.pipe';
     AdminRoutingModule,
     ReactiveFormsModule,
     SharedModule,
-    TranslateModule.forChild()
+    TranslocoModule
   ],
   declarations: [LoginComponent, DashboardComponent, StatusPipe, TimestampPipe, EditComponent, PassPipe]
 })

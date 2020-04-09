@@ -21,11 +21,11 @@
       </tr>
       <tr>
         <th>ประเภทการจัดส่ง</th>
-        <td>{{ donation.register.shipping_type | shippingType | translate }}</td>
+        <td>{{ donation.register.shipping_type | shippingType | transloco }}</td>
       </tr>
       <tr>
         <th>ใบเสร็จรับเงิน</th>
-        <td>{{ donation.register.receipt | receipt | translate }}</td>
+        <td>{{ donation.register.receipt | receipt | transloco }}</td>
       </tr>
       <tr *ngIf="donation.register.receipt === true">
         <th>ชื่อในใบเสร็จรับเงิน</th>
