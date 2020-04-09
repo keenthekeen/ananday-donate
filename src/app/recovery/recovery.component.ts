@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { FirebaseApp } from '@angular/fire';
 import { Router, ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -18,7 +18,7 @@ export class RecoveryComponent implements OnInit {
     private firebase: FirebaseApp,
     private router: Router,
     private route: ActivatedRoute,
-    private translate: TranslateService
+    private translate: TranslocoService
   ) {}
 
   ngOnInit() {
@@ -41,7 +41,7 @@ export class RecoveryComponent implements OnInit {
         }
       } else {
         this.translate
-          .get('recovery.not_found')
+          .selectTranslateObject('recovery.not_found')
           .pipe(first())
           .subscribe(t => {
             alert(t);
