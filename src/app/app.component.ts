@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { Title } from '@angular/platform-browser';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 
@@ -11,10 +11,10 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 export class AppComponent {
   collapse = true;
   faFacebook = faFacebook;
-  constructor(private translate: TranslateService, private title: Title) {
+  constructor(translate: TranslocoService, title: Title) {
     translate.setDefaultLang('th');
-    translate.use('th');
-    translate.get('common.title').subscribe(s => {
+    translate.setActiveLang('th');
+    translate.selectTranslateObject('common.title').subscribe(s => {
       title.setTitle(s);
     });
   }
