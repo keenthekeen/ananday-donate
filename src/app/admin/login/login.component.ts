@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   submit() {
-    this.afa.auth
+    this.afa
       .signInWithEmailAndPassword(
         this.loginForm.value.email,
         this.loginForm.value.password
