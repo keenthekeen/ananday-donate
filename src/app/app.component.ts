@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import { Title } from '@angular/platform-browser';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'and-root',
