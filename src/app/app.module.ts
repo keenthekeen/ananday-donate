@@ -13,7 +13,7 @@ import {
   RECAPTCHA_SETTINGS,
   RecaptchaModule,
   RecaptchaSettings
-} from 'ng-recaptcha';
+} from './ng-recaptcha';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RecoveryComponent } from './recovery/recovery.component';
@@ -39,7 +39,7 @@ import { TranslocoRootModule } from './transloco-root.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    RecaptchaModule.forRoot(),
+    RecaptchaModule,
     AngularFireModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule,

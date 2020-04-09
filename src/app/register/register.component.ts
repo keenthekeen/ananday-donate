@@ -9,7 +9,7 @@ import {
 import { TranslocoService } from '@ngneat/transloco';
 import { FirebaseApp } from '@angular/fire';
 import 'firebase/functions';
-import { RecaptchaComponent } from 'ng-recaptcha';
+import { RecaptchaComponent } from '../ng-recaptcha';
 import { Observable, combineLatest } from 'rxjs';
 import { first, map, distinctUntilChanged, startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
