@@ -6,7 +6,7 @@ import {
   ValidatorFn,
   Validators
 } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslocoService } from '@ngneat/transloco';
 import { FirebaseApp } from '@angular/fire';
 import 'firebase/functions';
 import { RecaptchaComponent } from 'ng-recaptcha';
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private firebase: FirebaseApp,
     private fb: FormBuilder,
-    private translate: TranslateService,
+    private translate: TranslocoService,
     private cd: ChangeDetectorRef,
     private router: Router,
     private route: ActivatedRoute
@@ -117,7 +117,7 @@ export class RegisterComponent implements OnInit {
       })
     );
     const sub = this.translate
-      .get('register.donation-details.no-file')
+      .selectTranslateObject('register.donation-details.no-file')
       .pipe(first())
       .subscribe(t => {
         this.noFileName = t;
@@ -226,7 +226,7 @@ export class RegisterComponent implements OnInit {
       allowedFileTypes.indexOf(file.type) === -1
     ) {
       this.translate
-        .get('register.donation-details.invalid-file')
+        .selectTranslateObject('register.donation-details.invalid-file')
         .pipe(first())
         .subscribe(t => {
           alert(t);
