@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
             return this.allDonations$.pipe(
               map(ds => {
                 return ds.filter(d => {
-                  return d.badge && !d.badge_shipping;
+                  return d.check && d.check.pass && d.badge && !d.badge_shipping;
                 });
               })
             );
@@ -79,11 +79,9 @@ export class DashboardComponent implements OnInit {
               map(ds => {
                 return ds.filter(d => {
                   return (
-                    d.register.receipt &&
+                    d.register.receipt && d.check && d.check.pass &&
                     ((d.badge_shipping && !d.receipt) ||
                       (d.register.badge_amount === 0 &&
-                        d.check &&
-                        d.check.pass &&
                         !d.receipt))
                   );
                 });
@@ -93,7 +91,7 @@ export class DashboardComponent implements OnInit {
             return this.allDonations$.pipe(
               map(ds => {
                 return ds.filter(d => {
-                  return d.receipt && !d.receipt_shipping;
+                  return d.check && d.check.pass && d.receipt && !d.receipt_shipping;
                 });
               })
             );
