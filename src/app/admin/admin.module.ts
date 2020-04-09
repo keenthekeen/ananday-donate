@@ -9,7 +9,7 @@ import { StatusPipe } from './status.pipe';
 import { TimestampPipe } from './timestamp.pipe';
 import { EditComponent } from './edit/edit.component';
 import { SharedModule } from '../shared/shared.module';
-import { TranslocoModule } from '@ngneat/transloco'
+import { TranslocoModule } from '@ngneat/transloco';
 import { PassPipe } from './pass.pipe';
 
 @NgModule({
