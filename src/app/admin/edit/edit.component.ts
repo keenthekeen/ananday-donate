@@ -33,19 +33,19 @@ export class EditComponent implements OnInit {
 
   ngOnInit() {
     this.donation$ = this.route.paramMap.pipe(
-      map(p => p.get('id')),
-      switchMap(id => {
+      map((p) => p.get('id')),
+      switchMap((id) => {
         return this.afd.object(`donations/${id}`).valueChanges();
       })
     );
     this.donationRef$ = this.route.paramMap.pipe(
-      map(p => p.get('id')),
-      map(id => {
+      map((p) => p.get('id')),
+      map((id) => {
         return this.afd.database.ref(`donations/${id}`);
       })
     );
     this.slipUrl = this.donation$.pipe(
-      switchMap(d =>
+      switchMap((d) =>
         this.afs.ref(`donations/${d.register.slip_fileName}`).getDownloadURL()
       )
     );
@@ -70,7 +70,7 @@ export class EditComponent implements OnInit {
   }
 
   prepareBadge() {
-    this.donationRef$.pipe(first()).subscribe(ref => {
+    this.donationRef$.pipe(first()).subscribe((ref) => {
       ref.update({
         badge: true
       });
@@ -78,7 +78,7 @@ export class EditComponent implements OnInit {
   }
 
   shipBadge(shipping_type: string) {
-    this.donationRef$.pipe(first()).subscribe(ref => {
+    this.donationRef$.pipe(first()).subscribe((ref) => {
       const val: any = { done: true };
       if (shipping_type === 'registered') {
         val.code = this.badge_shipping_code.value;
@@ -90,7 +90,7 @@ export class EditComponent implements OnInit {
   }
 
   prepareReceipt() {
-    this.donationRef$.pipe(first()).subscribe(ref => {
+    this.donationRef$.pipe(first()).subscribe((ref) => {
       ref.update({
         receipt: {
           done: true,
@@ -101,7 +101,7 @@ export class EditComponent implements OnInit {
   }
 
   shipReceipt(shipping_type: string) {
-    this.donationRef$.pipe(first()).subscribe(ref => {
+    this.donationRef$.pipe(first()).subscribe((ref) => {
       const val: any = { done: true };
       if (shipping_type === 'registered') {
         val.code = this.receipt_shipping_code.value;

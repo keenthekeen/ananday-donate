@@ -9,7 +9,7 @@ import {
   NgZone,
   OnDestroy,
   Optional,
-  Output,
+  Output
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -22,7 +22,7 @@ let nextId = 0;
   exportAs: 'reCaptcha',
   // tslint:disable-next-line: component-selector
   selector: 're-captcha',
-  template: ``,
+  template: ``
 })
 export class RecaptchaComponent implements AfterViewInit, OnDestroy {
   @Input()
@@ -51,7 +51,7 @@ export class RecaptchaComponent implements AfterViewInit, OnDestroy {
     private elementRef: ElementRef,
     private loader: RecaptchaLoaderService,
     private zone: NgZone,
-    @Optional() @Inject(RECAPTCHA_SETTINGS) settings?: RecaptchaSettings,
+    @Optional() @Inject(RECAPTCHA_SETTINGS) settings?: RecaptchaSettings
   ) {
     if (settings) {
       this.siteKey = settings.siteKey;
@@ -63,12 +63,14 @@ export class RecaptchaComponent implements AfterViewInit, OnDestroy {
   }
 
   public ngAfterViewInit() {
-    this.subscription = this.loader.ready.subscribe((grecaptcha: ReCaptchaV2.ReCaptcha) => {
-      if (grecaptcha != null && grecaptcha.render instanceof Function) {
-        this.grecaptcha = grecaptcha;
-        this.renderRecaptcha();
+    this.subscription = this.loader.ready.subscribe(
+      (grecaptcha: ReCaptchaV2.ReCaptcha) => {
+        if (grecaptcha != null && grecaptcha.render instanceof Function) {
+          this.grecaptcha = grecaptcha;
+          this.renderRecaptcha();
+        }
       }
-    });
+    );
   }
 
   public ngOnDestroy() {
@@ -141,7 +143,7 @@ export class RecaptchaComponent implements AfterViewInit, OnDestroy {
       size: this.size,
       tabindex: this.tabIndex,
       theme: this.theme,
-      type: this.type,
+      type: this.type
     });
 
     if (this.executeRequested === true) {

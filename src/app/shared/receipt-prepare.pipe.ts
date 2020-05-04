@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'receiptPrepare'
 })
 export class ReceiptPreparePipe implements PipeTransform {
-
   transform(value: any, args?: any): any {
     if (value) {
       return 'tracking.details.receipt_prepared';
@@ -12,5 +11,4 @@ export class ReceiptPreparePipe implements PipeTransform {
       return 'tracking.details.receipt_not_prepared';
     }
   }
-
 }

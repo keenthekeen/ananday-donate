@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'shippingType'
 })
 export class ShippingTypePipe implements PipeTransform {
-
   transform(value: any, args?: any): any {
     if (value === 'registered') {
       return 'common.shipping_type.registered';
@@ -12,5 +11,4 @@ export class ShippingTypePipe implements PipeTransform {
       return 'common.shipping_type.normal';
     }
   }
-
 }

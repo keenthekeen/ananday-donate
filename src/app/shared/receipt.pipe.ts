@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'receipt'
 })
 export class ReceiptPipe implements PipeTransform {
-
   transform(value: any, args?: any): any {
     if (value) {
       return 'common.receipt.yes';
@@ -12,5 +11,4 @@ export class ReceiptPipe implements PipeTransform {
       return 'common.receipt.no';
     }
   }
-
 }

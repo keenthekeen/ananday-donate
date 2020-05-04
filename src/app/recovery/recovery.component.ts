@@ -29,10 +29,8 @@ export class RecoveryComponent implements OnInit {
   }
 
   submit() {
-    const lookup = this.firebase.functions().httpsCallable(
-      'lookup'
-    );
-    lookup(this.recoveryForm.value).then(res => {
+    const lookup = this.firebase.functions().httpsCallable('lookup');
+    lookup(this.recoveryForm.value).then((res) => {
       if (res.data.success) {
         if (res.data.codes.length === 1) {
           this.router.navigate(['/track', res.data.codes[0]]);
@@ -43,7 +41,7 @@ export class RecoveryComponent implements OnInit {
         this.translate
           .selectTranslate('recovery.not_found')
           .pipe(first())
-          .subscribe(t => {
+          .subscribe((t) => {
             alert(t);
           });
       }

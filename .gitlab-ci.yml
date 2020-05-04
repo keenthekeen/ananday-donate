@@ -3,6 +3,7 @@ build:
   stage: build
   script:
     - npm ci
+    - npx ng lint
     - npx ng build --prod
   artifacts:
     paths:

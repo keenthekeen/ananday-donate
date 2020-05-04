@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  ActivatedRouteSnapshot,
+  CanActivate,
+  Router,
+  RouterStateSnapshot
+} from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
@@ -10,23 +15,27 @@ export class AdminGuard implements CanActivate {
 
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return this.afa.authState.pipe(first(), map(u => {
-      if (next.data.auth) {
-        if (u) {
-          return true;
+    state: RouterStateSnapshot
+  ): Observable<boolean> | Promise<boolean> | boolean {
+    return this.afa.authState.pipe(
+      first(),
+      map((u) => {
+        if (next.data.auth) {
+          if (u) {
+            return true;
+          } else {
+            this.router.navigate(['/']);
+            return false;
+          }
         } else {
-          this.router.navigate(['/']);
-          return false;
+          if (u) {
+            this.router.navigate(['/admin', 'dashboard']);
+            return false;
+          } else {
+            return true;
+          }
         }
-      } else {
-        if (u) {
-          this.router.navigate(['/admin', 'dashboard']);
-          return false;
-        } else {
-          return true;
-        }
-      }
-    }));
+      })
+    );
   }
 }

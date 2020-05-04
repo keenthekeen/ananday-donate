@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'badgePrepare'
 })
 export class BadgePreparePipe implements PipeTransform {
-
   transform(value: any, args?: any): any {
     if (value) {
       return 'tracking.details.badge_prepared';
@@ -12,5 +11,4 @@ export class BadgePreparePipe implements PipeTransform {
       return 'tracking.details.badge_not_prepared';
     }
   }
-
 }

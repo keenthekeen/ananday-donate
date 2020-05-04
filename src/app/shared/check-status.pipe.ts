@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'checkStatus'
 })
 export class CheckStatusPipe implements PipeTransform {
-
   transform(value: any, args?: any): any {
     if (value) {
       if (value.pass) {
@@ -16,5 +15,4 @@ export class CheckStatusPipe implements PipeTransform {
       return '/assets/02-check-pass.png';
     }
   }
-
 }

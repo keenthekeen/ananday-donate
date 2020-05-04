@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(translate: TranslocoService, title: Title) {
     translate.setDefaultLang('th');
     translate.setActiveLang('th');
-    translate.selectTranslate('common.title').subscribe(s => {
+    translate.selectTranslate('common.title').subscribe((s) => {
       title.setTitle(s);
     });
   }

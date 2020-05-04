@@ -25,13 +25,13 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.allDonations$ = this.afd
-      .list('donations', ref => {
+      .list('donations', (ref) => {
         return ref.orderByChild('register/timestamp');
       })
       .valueChanges();
     this.currentMode$ = this.route.paramMap.pipe(
-      map(p => p.get('mode')),
-      map(mode => {
+      map((p) => p.get('mode')),
+      map((mode) => {
         if (mode) {
           return mode;
         } else {
@@ -41,22 +41,22 @@ export class DashboardComponent implements OnInit {
     );
     this.dateFilter$ = new BehaviorSubject<string>('');
     this.filteredDonations$ = this.currentMode$.pipe(
-      switchMap(mode => {
+      switchMap((mode) => {
         switch (mode) {
           case 'all':
             return this.allDonations$;
           case 'check':
             return this.allDonations$.pipe(
-              map(ds => {
-                return ds.filter(d => {
+              map((ds) => {
+                return ds.filter((d) => {
                   return !d.check;
                 });
               })
             );
           case 'prepare_badge':
             return this.allDonations$.pipe(
-              map(ds => {
-                return ds.filter(d => {
+              map((ds) => {
+                return ds.filter((d) => {
                   return (
                     d.check &&
                     d.check.pass &&
@@ -68,37 +68,42 @@ export class DashboardComponent implements OnInit {
             );
           case 'ship_badge':
             return this.allDonations$.pipe(
-              map(ds => {
-                return ds.filter(d => {
-                  return d.check && d.check.pass && d.badge && !d.badge_shipping;
+              map((ds) => {
+                return ds.filter((d) => {
+                  return (
+                    d.check && d.check.pass && d.badge && !d.badge_shipping
+                  );
                 });
               })
             );
           case 'prepare_receipt':
             return this.allDonations$.pipe(
-              map(ds => {
-                return ds.filter(d => {
+              map((ds) => {
+                return ds.filter((d) => {
                   return (
-                    d.register.receipt && d.check && d.check.pass &&
+                    d.register.receipt &&
+                    d.check &&
+                    d.check.pass &&
                     ((d.badge_shipping && !d.receipt) ||
-                      (d.register.badge_amount === 0 &&
-                        !d.receipt))
+                      (d.register.badge_amount === 0 && !d.receipt))
                   );
                 });
               })
             );
           case 'ship_receipt':
             return this.allDonations$.pipe(
-              map(ds => {
-                return ds.filter(d => {
-                  return d.check && d.check.pass && d.receipt && !d.receipt_shipping;
+              map((ds) => {
+                return ds.filter((d) => {
+                  return (
+                    d.check && d.check.pass && d.receipt && !d.receipt_shipping
+                  );
                 });
               })
             );
           case 'done':
             return this.allDonations$.pipe(
-              map(ds => {
-                return ds.filter(d => {
+              map((ds) => {
+                return ds.filter((d) => {
                   return (
                     (d.register.badge_amount === 0 || d.badge_shipping) &&
                     (!d.register.receipt || d.receipt_shipping) &&
@@ -110,8 +115,8 @@ export class DashboardComponent implements OnInit {
             );
           case 'not_pass':
             return this.allDonations$.pipe(
-              map(ds => {
-                return ds.filter(d => {
+              map((ds) => {
+                return ds.filter((d) => {
                   return d.check && !d.check.pass;
                 });
               })
@@ -122,10 +127,10 @@ export class DashboardComponent implements OnInit {
       })
     );
     this.dateFilteredDonations$ = this.dateFilter$.pipe(
-      switchMap(da => {
+      switchMap((da) => {
         return this.filteredDonations$.pipe(
-          map(ds => {
-            return ds.filter(d => {
+          map((ds) => {
+            return ds.filter((d) => {
               if (da === '') {
                 return true;
               } else {

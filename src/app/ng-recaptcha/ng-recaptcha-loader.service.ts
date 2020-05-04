@@ -4,13 +4,19 @@ import {
   Injectable,
   InjectionToken,
   Optional,
-  PLATFORM_ID,
+  PLATFORM_ID
 } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 
-export const RECAPTCHA_LANGUAGE = new InjectionToken<string>('recaptcha-language');
-export const RECAPTCHA_BASE_URL = new InjectionToken<string>('recaptcha-base-url');
-export const RECAPTCHA_NONCE = new InjectionToken<string>('recaptcha-nonce-tag');
+export const RECAPTCHA_LANGUAGE = new InjectionToken<string>(
+  'recaptcha-language'
+);
+export const RECAPTCHA_BASE_URL = new InjectionToken<string>(
+  'recaptcha-base-url'
+);
+export const RECAPTCHA_NONCE = new InjectionToken<string>(
+  'recaptcha-nonce-tag'
+);
 
 declare global {
   interface Window {
@@ -23,7 +29,7 @@ export function loadScript(
   onLoaded: (grecaptcha: ReCaptchaV2.ReCaptcha) => void,
   urlParams: string,
   url?: string,
-  nonce?: string,
+  nonce?: string
 ) {
   window.ng2recaptchaloaded = () => {
     onLoaded(grecaptcha);
@@ -64,13 +70,15 @@ export class RecaptchaLoaderService {
     @Inject(PLATFORM_ID) private readonly platformId: any,
     @Optional() @Inject(RECAPTCHA_LANGUAGE) language?: string,
     @Optional() @Inject(RECAPTCHA_BASE_URL) baseUrl?: string,
-    @Optional() @Inject(RECAPTCHA_NONCE) nonce?: string,
+    @Optional() @Inject(RECAPTCHA_NONCE) nonce?: string
   ) {
     this.language = language;
     this.baseUrl = baseUrl;
     this.nonce = nonce;
     this.init();
-    this.ready = isPlatformBrowser(this.platformId) ? RecaptchaLoaderService.ready.asObservable() : of();
+    this.ready = isPlatformBrowser(this.platformId)
+      ? RecaptchaLoaderService.ready.asObservable()
+      : of();
   }
 
   /** @internal */
@@ -82,7 +90,13 @@ export class RecaptchaLoaderService {
       const subject = new BehaviorSubject<ReCaptchaV2.ReCaptcha>(null);
       RecaptchaLoaderService.ready = subject;
       const langParam = this.language ? '&hl=' + this.language : '';
-      loadScript('explicit', (grecaptcha) => subject.next(grecaptcha), langParam, this.baseUrl, this.nonce);
+      loadScript(
+        'explicit',
+        (grecaptcha) => subject.next(grecaptcha),
+        langParam,
+        this.baseUrl,
+        this.nonce
+      );
     }
   }
 }

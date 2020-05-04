@@ -20,6 +20,13 @@ import { PassPipe } from './pass.pipe';
     SharedModule,
     TranslocoModule
   ],
-  declarations: [LoginComponent, DashboardComponent, StatusPipe, TimestampPipe, EditComponent, PassPipe]
+  declarations: [
+    LoginComponent,
+    DashboardComponent,
+    StatusPipe,
+    TimestampPipe,
+    EditComponent,
+    PassPipe
+  ]
 })
-export class AdminModule { }
+export class AdminModule {}

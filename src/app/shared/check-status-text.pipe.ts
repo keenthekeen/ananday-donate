@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'checkStatusText'
 })
 export class CheckStatusTextPipe implements PipeTransform {
-
   transform(value: any, args?: any): any {
     if (value) {
       if (value.pass) {
@@ -16,5 +15,4 @@ export class CheckStatusTextPipe implements PipeTransform {
       return 'tracking.details.not_checked';
     }
   }
-
 }

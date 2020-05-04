@@ -14,6 +14,56 @@ import { Observable, combineLatest } from 'rxjs';
 import { first, map, distinctUntilChanged, startWith } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 
+const shippingTypeValidator: ValidatorFn = (control: AbstractControl) => {
+  if (control.value === 'registered' || control.value === 'normal') {
+    return null;
+  } else {
+    return {
+      shipping_type: true
+    };
+  }
+};
+
+const conditionallyRequired = (
+  condition: (...values: any[]) => boolean,
+  ...controlNames: string[]
+) => {
+  return (control: AbstractControl) => {
+    if (condition(...controlNames.map((name) => control.get(name).value))) {
+      const errors = Validators.required(control.get(controlNames[0]));
+      if (errors && errors.required) {
+        const errorName = `${controlNames[0]}_required`;
+        return {
+          [errorName]: true
+        };
+      } else {
+        return null;
+      }
+    } else {
+      return null;
+    }
+  };
+};
+
+const validateBadgeAmount = (control: AbstractControl) => {
+  const donation_amount = control.get('donation_amount').value;
+  const badge_amount_control = control.get('badge_amount');
+  const shipping_type = control.get('shipping_type').value;
+  let max_amount = 0;
+  if (shipping_type === 'registered') {
+    max_amount = Math.floor((donation_amount - 40) / 100);
+  } else {
+    max_amount = Math.floor(donation_amount / 100);
+  }
+  if (control.get('badge_amount').value > max_amount) {
+    return {
+      max_badge_amount: true
+    };
+  } else {
+    return null;
+  }
+};
+
 @Component({
   selector: 'and-register',
   templateUrl: './register.component.html',
@@ -104,10 +154,10 @@ export class RegisterComponent implements OnInit {
         }
       }
     );
-    this.maxBadge$ = combineLatest(
+    this.maxBadge$ = combineLatest([
       this.registerForm.get('donation_amount').valueChanges,
       this.registerForm.get('shipping_type').valueChanges
-    ).pipe(
+    ]).pipe(
       map(([amount, shipping_type]) => {
         if (shipping_type === 'registered') {
           return Math.floor((amount - 40) / 100);
@@ -119,7 +169,7 @@ export class RegisterComponent implements OnInit {
     const sub = this.translate
       .selectTranslate('register.donation-details.no-file')
       .pipe(first())
-      .subscribe(t => {
+      .subscribe((t) => {
         this.noFileName = t;
         this.fileName = t;
       });
@@ -189,11 +239,9 @@ export class RegisterComponent implements OnInit {
       }
     }
     formData.reCaptchaResponse = reCaptchaResponse;
-    const register = this.firebase.functions().httpsCallable(
-      'register'
-    );
+    const register = this.firebase.functions().httpsCallable('register');
     register(formData)
-      .then(result => {
+      .then((result) => {
         const { success, track_code } = result.data;
         if (success) {
           this.router.navigate(['/track', track_code], {
@@ -203,7 +251,7 @@ export class RegisterComponent implements OnInit {
           this.submitting = false;
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log('Error');
         console.log(error);
       });
@@ -228,7 +276,7 @@ export class RegisterComponent implements OnInit {
       this.translate
         .selectTranslate('register.donation-details.invalid-file')
         .pipe(first())
-        .subscribe(t => {
+        .subscribe((t) => {
           alert(t);
           this.fileName = this.noFileName;
         });
@@ -245,53 +293,3 @@ export class RegisterComponent implements OnInit {
     }
   }
 }
-
-const shippingTypeValidator: ValidatorFn = (control: AbstractControl) => {
-  if (control.value === 'registered' || control.value === 'normal') {
-    return null;
-  } else {
-    return {
-      shipping_type: true
-    };
-  }
-};
-
-const conditionallyRequired = (
-  condition: (...values: any[]) => boolean,
-  ...controlNames: string[]
-) => {
-  return (control: AbstractControl) => {
-    if (condition(...controlNames.map(name => control.get(name).value))) {
-      const errors = Validators.required(control.get(controlNames[0]));
-      if (errors && errors.required) {
-        const errorName = `${controlNames[0]}_required`;
-        return {
-          [errorName]: true
-        };
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
-  };
-};
-
-const validateBadgeAmount = (control: AbstractControl) => {
-  const donation_amount = control.get('donation_amount').value;
-  const badge_amount_control = control.get('badge_amount');
-  const shipping_type = control.get('shipping_type').value;
-  let max_amount = 0;
-  if (shipping_type === 'registered') {
-    max_amount = Math.floor((donation_amount - 40) / 100);
-  } else {
-    max_amount = Math.floor(donation_amount / 100);
-  }
-  if (control.get('badge_amount').value > max_amount) {
-    return {
-      max_badge_amount: true
-    };
-  } else {
-    return null;
-  }
-};
