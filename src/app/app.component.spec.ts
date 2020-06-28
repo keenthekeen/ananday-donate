@@ -1,32 +1,26 @@
-import {async, TestBed} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {AppComponent} from './app.component';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {TranslocoTestingModule, TranslocoConfig} from '@ngneat/transloco';
+import { async, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TranslocoTestingModule, TranslocoConfig } from '@ngneat/transloco';
 import th from '../assets/i18n/th.json';
 
 const getTranslocoModule = (config: Partial<TranslocoConfig> = {}) => {
   return TranslocoTestingModule.withLangs(
-    {th},
+    { th },
     {
       availableLangs: ['th'],
       defaultLang: 'th',
       ...config
     }
-  )
-}
+  );
+};
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule,
-        FontAwesomeModule,
-        getTranslocoModule()
-      ],
-      declarations: [
-        AppComponent
-      ]
+      imports: [RouterTestingModule, FontAwesomeModule, getTranslocoModule()],
+      declarations: [AppComponent]
     }).compileComponents();
   }));
   it('should create the app', async(() => {
@@ -43,6 +37,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('footer a').textContent).toContain('ANAN DAY');
+    expect(compiled.querySelector('footer a').textContent).toContain(
+      'ANAN DAY'
+    );
   }));
 });
