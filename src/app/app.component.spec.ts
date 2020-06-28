@@ -2,13 +2,27 @@ import {async, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {TranslocoTestingModule, TranslocoConfig} from '@ngneat/transloco';
+import th from '../assets/i18n/th.json';
+
+const getTranslocoModule = (config: Partial<TranslocoConfig> = {}) => {
+  return TranslocoTestingModule.withLangs(
+    {th},
+    {
+      availableLangs: ['th'],
+      defaultLang: 'th',
+      ...config
+    }
+  )
+}
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        getTranslocoModule()
       ],
       declarations: [
         AppComponent
